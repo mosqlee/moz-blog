@@ -1,0 +1,23 @@
+    .login-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        background: #FFF;
+        background-size: cover;
+    }
+    .login-form {
+        max-width: 400px;
+        padding: 20px;
+        background: #FFF;
+        opacity: .8;
+    }
+
+    .login-form-forgot {
+        float: right;
+    }
+
+    .login-form-button {
+        width: 100%;
+    }

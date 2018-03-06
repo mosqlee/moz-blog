@@ -1,0 +1,24 @@
+<nz-layout style="min-height: 100vh;">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'">
+    <div class="logo">
+      听说有个logo
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+      <li nz-menu-item *ngFor="let item of homeNav" routerLink="{{item.route}}" routerLinkActive="ant-menu-item-selected">
+        <span>
+          <i class="anticon anticon-book"></i>
+          <span class="nav-text">{{item.name}}</span>
+        </span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;"></nz-header>
+    <nz-content style="margin:24px 16px 0;">
+      <div style="padding:24px; background: #fff; min-height: 360px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">wenziguo blog ©2017 Implement By Angular&zorro</nz-footer>
+  </nz-layout>
+</nz-layout>
