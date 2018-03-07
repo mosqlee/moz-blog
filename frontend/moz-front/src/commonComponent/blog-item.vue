@@ -1,27 +1,21 @@
 <template>
-  <article class="blog-item-container">
-      <div class="blog-title-intro">
-          <h2>{{item.title}}</h2>
-          <p class="blog-time">{{item.createAt | formatDate(item.category)}}</p>
-          <p class="blog-intro">{{item.intro}}</p>
-      </div>
-      <img class="blog-item-img" :src="item.img" alt="">
-  </article>
+  <div>
+    <article class="blog-item-container" v-for="item in items" :key="item.id">
+        <div class="blog-title-intro">
+            <h2>{{item.title}}</h2>
+            <p class="blog-time">{{item.createAt | formatDate(item.category)}}</p>
+            <p class="blog-intro">{{item.intro}}</p>
+        </div>
+        <img class="blog-item-img" :src="item.img" alt="">
+    </article>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'blog',
   props: {
-    item: {
-      title: String,
-      intro: String,
-      createAt: Number,
-      id: Number,
-      updateAt: Number,
-      img: String,
-      category: String
-    }
+    items: Array
   },
   data () {
     return {}

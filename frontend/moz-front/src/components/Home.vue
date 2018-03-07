@@ -1,7 +1,7 @@
 <template>
     <div>
     <section class="blog-item-container">
-        <blog :item="data"></blog>
+        <blog :items="data"></blog>
     </section>
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
   components: {Blog},
   data () {
     return {
-      data: {
+      data: [{
         title: 'learn rxjs',
         intro: `sdfasdfwasdfasdfasdrqwerwerwqerwasdfasasdfasdfdfqerqwerwqerqwewqerwqerqweasasdfsadfdfasdsadfsadffasdfrqwer
         qwerqwesdfaasdfsadfasdfasdfsdfsarqwerqwer
@@ -23,8 +23,11 @@ export default {
         updateAt: Date.parse(new Date()) + 21000,
         img: `https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520414235775&di=94d02d3aa3b0fa0fcc1fe369861e72d0&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F314e251f95cad1c847e70404733e6709c93d51b1.jpg`,
         category: `计算机基础`
-      }
+      }]
     }
+  },
+  beforeCreate: function () {
+    console.log(this.data)
   }
 }
 </script>
