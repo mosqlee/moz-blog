@@ -1,33 +1,45 @@
 <template>
     <div>
     <section class="blog-item-container">
-        <blog :items="data"></blog>
+      <blog :items="blog"></blog>
     </section>
     </div>
 </template>
 
 <script>
 import Blog from '../commonComponent/blog-item'
+import { mapState } from 'vuex'
+// import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {Blog},
   data () {
     return {
-      data: [{
-        title: 'learn rxjs',
-        intro: `sdfasdfwasdfasdfasdrqwerwerwqerwasdfasasdfasdfdfqerqwerwqerqwewqerwqerqweasasdfsadfdfasdsadfsadffasdfrqwer
-        qwerqwesdfaasdfsadfasdfasdfsdfsarqwerqwer
-        qwerqwasdfasasdfasdfasdfdfasdfasdfasdffsadferwqer`,
-        id: Math.floor(Math.random() * 10),
-        createAt: Date.parse(new Date()),
-        updateAt: Date.parse(new Date()) + 21000,
-        img: `https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520414235775&di=94d02d3aa3b0fa0fcc1fe369861e72d0&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F314e251f95cad1c847e70404733e6709c93d51b1.jpg`,
-        category: `计算机基础`
-      }]
+      data: 'test'
     }
   },
-  beforeCreate: function () {
-    console.log(this.data)
+  // computed: mapGetters({
+  //   blog: 'blogArray'
+  // }),
+  computed: {
+    ...mapState({
+      blog: state => state.blogs.bolg_array
+    })
+  },
+  methods: {
+    query: function () {
+      this.$store.dispatch({
+        type: 'query'
+      })
+    }
+  },
+  created: function () {
+    this.query()
+    setTimeout(() => {
+      console.log(this.$store.state.blogs)
+      // this.$store.state.blogs.bolg_array = [{title: 1}]
+      console.log(this.$store.state.blogs.bolg_array)
+    }, 2000)
   }
 }
 </script>

@@ -13,6 +13,7 @@
           <i class="iconfont nav-icon" :class="item.class"></i>
           <span class="hide-768">{{item.name}}</span>
         </router-link>
+        <p style="display: none">{{blog.length}}</p>
       </ul>
     </nav>
     <router-view class="main"></router-view>
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Index',
   data () {
@@ -30,6 +32,11 @@ export default {
         {route: '/about', name: '联系我', class: 'icon-email'}
       ]
     }
+  },
+  computed: {
+    ...mapState({
+      blog: state => state.blogs.bolg_array
+    })
   }
 }
 </script>

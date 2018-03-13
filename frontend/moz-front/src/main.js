@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
-
+import store from './store'
 if (process.env) {
   require('../mock/mock')
 }
@@ -18,6 +18,7 @@ Vue.use(Vuex)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

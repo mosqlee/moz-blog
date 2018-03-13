@@ -38,7 +38,7 @@ export default {
     .blog-item-container {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         margin: 20px auto;
     }
     h2 {
@@ -47,6 +47,7 @@ export default {
     .blog-item-img {
         width: 150px;
         height: 150px;
+        flex-shrink: 0;
     }
     .blog-time {
         font-size: 14px;
