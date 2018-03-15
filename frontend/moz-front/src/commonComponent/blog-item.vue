@@ -2,7 +2,8 @@
   <div>
     <article class="blog-item-container" v-for="item in items" :key="item.id">
         <div class="blog-title-intro">
-            <h2>{{item.title}}</h2>
+            <router-link tag="h2"
+            :to="{ name: 'blogDetail', params: { id: item.id }}">{{item.title}}</router-link>
             <p class="blog-time">{{item.createAt | formatDate(item.category)}}</p>
             <p class="blog-intro">{{item.intro}}</p>
         </div>
@@ -39,7 +40,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 20px auto;
+        margin: 40px auto;
     }
     h2 {
       cursor: pointer;

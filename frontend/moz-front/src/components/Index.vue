@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       routeList: [
-        {route: '/home', name: '首页 ', class: 'icon-home'},
+        {route: '/home/1', name: '首页 ', class: 'icon-home'},
         {route: '/category', name: '分类', class: 'icon-categoryselected'},
         {route: '/about', name: '联系我', class: 'icon-email'}
       ]
