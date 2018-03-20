@@ -1,7 +1,7 @@
 <nz-layout style="min-height: 100vh;">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'md'">
     <div class="logo">
-      听说有个logo
+      my blog
     </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
       <li nz-menu-item *ngFor="let item of homeNav" routerLink="{{item.route}}" routerLinkActive="ant-menu-item-selected">

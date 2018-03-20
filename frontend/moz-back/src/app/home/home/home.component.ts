@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   isCollapsed = false;
-  homeNav = [{name: '轮播图管理', route: 'carousel'}];
+  homeNav = [{name: '博客管理', route: 'blogList'}];
   constructor() { }
 
   ngOnInit() {

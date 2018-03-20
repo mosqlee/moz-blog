@@ -1,3 +1,4 @@
+import { LoginService } from './login/login.service';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +12,7 @@ import { appRoute } from './app.routes';
 import { LoginComponent } from './login/login.component';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,13 @@ import { InMemoryDataService } from './in-memory-data.service';
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoute),
     NgZorroAntdModule.forRoot(),
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
     HttpModule,
+    HttpClientModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,7 +9,7 @@ export default {
   name: 'Category',
   data () {
     return {
-      data: 'test'
+      data: 'waiting ~~~'
     }
   }
 }

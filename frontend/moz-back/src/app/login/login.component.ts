@@ -1,3 +1,5 @@
+import { LoginData } from './../model/login-data.model';
+import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -12,15 +14,19 @@ import {
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
+  public user: LoginData = new LoginData();
 
   _submitForm() {
-    console.log(1);
+    this.user = Object.assign({}, this.validateForm.value);
+    console.log(this.user);
+    this.loginService.login(this.user);
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
     }
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+  public loginService: LoginService) {
   }
 
   ngOnInit() {

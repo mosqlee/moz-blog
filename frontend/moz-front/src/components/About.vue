@@ -9,7 +9,7 @@ export default {
   name: 'About',
   data () {
     return {
-      data: 'about'
+      data: 'you can send email to liweiwen92@gmail.com.welcome to contact with me~.'
     }
   }
 }
