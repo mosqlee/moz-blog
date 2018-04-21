@@ -6,7 +6,8 @@ import router from './router'
 import Vuex from 'vuex'
 import store from './store'
 import commonFilters from './filter/index'
-if (process.env) {
+if (process.env.NODE_ENV === 'development') {
+  console.log(process.env)
   require('../mock/mock')
 }
 require('bootstrap-vue/dist/bootstrap-vue.min.css')
