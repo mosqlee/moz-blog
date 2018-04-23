@@ -37,9 +37,11 @@ export class InMemoryDataService implements InMemoryDbService {
         }];
         const blogDetail: BlogModel[] = [
             { id: 0, title: 'angular',
+            cate: 0,
             content: '12313', creatAt: 1513426971285, star: 5, readNum: 110},
             {
                 id: 1, title: 'angular',
+                cate: 1,
                 content: '12313', creatAt: 1513426971285, star: 5, readNum: 110
             },
         ];

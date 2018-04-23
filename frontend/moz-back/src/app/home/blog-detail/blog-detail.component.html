@@ -1,2 +1,30 @@
-<h2>{{blog.title}}</h2>
-<p [innerHtml]="blog.content"></p>
+<form #form="ngForm" (ngSubmit)="form.form.valid && submit()" action="" novalidate role="form">
+  <div class="form-item" nz-row>
+    <label nz-col [nzSpan]="2" for="title">*标题：</label>
+    <input class="border-form" 
+    [ngClass]="{'border-error':form.submitted && !title.valid}"
+    nz-col [nzSpan]="6" #title="ngModel"
+    type="text" name="title" [(ngModel)]="blog.title" required>
+    <p nz-col [nzSpan]="6" [nzOffset]="1">标题限制5-20个字</p>
+  </div>
+  <div class="form-item" nz-row>
+    <label nz-col [nzSpan]="2" for="cate">类型：</label>
+    <select nz-col 
+    [nzSpan]="3" name="cate" #cate="ngModel"
+    id="" [(ngModel)]="blog.cate" required>
+      <option *ngFor="let item of category" [ngValue]="item.id">{{item.value}}</option>
+    </select>
+  </div>
+  <div class="form-item">
+    <label for="content">内容：</label>
+    <span>{{form.submitted && !content.valid}}</span>
+    <p [ngClass]="{'letter-error':form.submitted && !content.valid}">内容限制50个字以上。</p>
+  </div>
+  <div id="md" appEditorMd [editormdConfig]="conf" [data]="blog" (onEditorChange)="syncModel($event)">
+    <textarea style="display: block;" name="content"
+    [(ngModel)]="markdown" #content="ngModel" required></textarea>
+  </div>
+  <button nz-button [nzType]="'primary'">
+    <span>提交</span>
+  </button>
+</form>
