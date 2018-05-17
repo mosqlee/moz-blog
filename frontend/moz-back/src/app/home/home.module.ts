@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { BlogModel } from './blog-detail/blog.model';
 import { GetBlogDetailService } from './blog-detail/get-blog-detail.service';
 import { BlogService } from './blog/blog.service';
@@ -10,15 +11,18 @@ import { HomeComponent } from './home/home.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { RouterModule } from '@angular/router';
 import { NewsComponent } from './news/news.component';
-import { EditorMdModule } from '';
+import { EditorMdDirective } from './editor/editor-md.directive';
 @NgModule({
   imports: [
     CommonModule,
     NgZorroAntdModule,
     RouterModule.forChild(homeRoute),
-    EditorMdModule
+    FormsModule
   ],
   providers: [BlogService, GetBlogDetailService, BlogModel],
-  declarations: [HomeComponent, BlogDetailComponent, NewsComponent, BlogComponent]
+  declarations: [HomeComponent,
+    BlogDetailComponent, NewsComponent,
+    BlogComponent,
+    EditorMdDirective]
 })
 export class HomeModule { }

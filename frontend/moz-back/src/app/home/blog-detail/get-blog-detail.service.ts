@@ -2,9 +2,15 @@ import { BlogModel } from './blog.model';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class GetBlogDetailService {
     private url = 'api/blogDetail';
+    public subject: Subject<BlogModel> = new Subject<BlogModel>();
+    public get currentBlog(): Observable<BlogModel> {
+        return this.subject.asObservable();
+    }
     constructor(
        private http: Http
     ) {}
@@ -17,7 +23,10 @@ export class GetBlogDetailService {
         return this.http.get(url)
         .toPromise()
         .then(res => {
-            return res.json() as BlogModel;
+            if (res) {
+                this.subject.next(Object.assign({}, res.json()));
+                return res.json() as BlogModel;
+            }
         })
             .catch(this.handleError);
     }
