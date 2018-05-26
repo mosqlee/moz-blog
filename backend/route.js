@@ -1,6 +1,6 @@
-module.exprts = function(fastify, options, next){
-    fastify.get('/', function(req, reply){
-        reply.send({hello: 'world'})
+async function routes(fastify, options) {
+    fastify.get('/', async (request, reply) => {
+        return { hello: 'world' }
     })
-    next()
 }
+module.exports = routes;

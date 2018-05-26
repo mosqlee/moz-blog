@@ -1,10 +1,6 @@
 const fastify = require('fastify')();
 
-fastify.get('/', (request, reply) => {
-  reply.send({
-    hello: 'world'
-  })
-})
+fastify.register(require('./route'))
 const opts = {
   schema: {
     response: {
@@ -19,7 +15,14 @@ const opts = {
     }
   }
 }
-fastify.listen(3000, opts
+// fastify.register(
+//   [route1],
+//   opts, function(err){
+//     if(err) throw err;
+//   }
+// )
+fastify.listen(3002, opts
    , function (err) {
   if (err) throw err;
+  console.log(`server listening on ${fastify.server.address().port}`)
 })
