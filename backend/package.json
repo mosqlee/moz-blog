@@ -13,22 +13,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "glob": "^7.1.2",
+    "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.2",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.2.8"
   },
   "devDependencies": {
     "@types/glob": "^5.0.35",
+    "@types/jsonwebtoken": "^7.2.8",
     "@types/koa": "^2.0.46",
     "@types/koa-bodyparser": "^5.0.1",
     "@types/koa-logger": "^3.1.0",
     "@types/koa-router": "^7.0.31",
     "@types/koa-session": "^5.7.4",
     "@types/koa-static": "^4.0.0",
+    "@types/mongoose": "^5.2.5",
     "nodemon": "^1.18.3",
     "ts-node": "^7.0.0",
     "typescript": "^3.0.1"
