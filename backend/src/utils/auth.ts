@@ -1,10 +1,10 @@
 // jwt 验证方法
 import * as jwt from 'jsonwebtoken'
-import { Context } from 'koa'
+import { Context, Request } from 'koa'
 
 import * as config from '../config'
 
-const authToken = (req: Context) => {
+const authToken = (req: Request) => {
   if(req.headers && req.headers.authorization){
     const parts = req.headers.authorization.split(' ')
     if(Object.is(parts.length, 2) && Object.is(parts[0], 'Bearer')) {
@@ -16,7 +16,7 @@ const authToken = (req: Context) => {
 
 // 验证权限
 
-const authIsVerified = (req: Context) =>{
+const authIsVerified = (req: Request) =>{
   const token = authToken(req)
   if(token) {
     try {

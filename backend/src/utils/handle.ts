@@ -6,7 +6,7 @@ export interface IParams {
   ctx: Koa.Context
   message: string
   err?:any
-  result?: any
+  data?: any
 }
 
 export const handleError =(
@@ -16,7 +16,7 @@ export const handleError =(
 }
 
 export const handleSuccess = (
-  { ctx, message = '请求成功', result = ''}: IParams
+  { ctx, message = '请求成功', data = ''}: IParams
 )=>{
-  ctx.response.body = { code: 1, message, result }
+  ctx.response.body = { code: 1, message, data }
 }

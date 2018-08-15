@@ -23,4 +23,16 @@ export const AUTH = {
   defaultPassword: argv.auth_default_password || '123456'
 }
 
-export default { env, ...common, sessionConf, AUTH, MONGODB }
+export const APP = {
+  ROOT_PATH: '/api',
+  LIMIT: 16,
+  PORT: 8000
+}
+export const INFO = {
+  name: 'moz_blog',
+  version: '1.0.0',
+  author: 'mozLee',
+  site: 'http://zengyupei.cn',
+  powered: ['Vue2', 'Node.js', 'MongoDB', 'koa', 'Nginx']
+}
+export default { env, ...common, sessionConf, AUTH, MONGODB, APP, INFO }

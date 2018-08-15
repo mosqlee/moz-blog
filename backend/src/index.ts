@@ -1,22 +1,32 @@
 import * as Koa from 'koa';
-import * as Router from 'koa-router';
 import * as Logger from 'koa-logger';
 import * as Static from 'koa-static';
-import * as session from 'koa-session';
-import CONFIG from './config';
-
+import * as koaBody from 'koa-body'  // post body 解析
+import config from './config';
+import router from './routes'
+import * as mongodb from './mongodb'
+import * as mongoosePaginate from 'mongoose-paginate'
 const app = new Koa();
-const router = new Router();
 
-router.get('/*', async (ctx:any) => {
-    ctx.body = 'Hello World!';
-});
+// data server
+mongodb.connect()
 
+mongoosePaginate.paginate.options = {
+  limit: config.APP.LIMIT
+}
 app.use(Logger());
-app.use(router.routes());
+
+app.use(koaBody({
+  jsonLimit: '10mb',
+  formLimit: '10mb',
+  textLimit: '10mb'
+}))
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
 app.use(Static(__dirname + '/../static'))
 app.use(Static(__dirname + '/../doc'))
-app.use(session(CONFIG.sessionConf, app));
-app.listen(CONFIG.PORT);
+// app.use(session(config.sessionConf, app));
+app.listen(config.APP.PORT);
 
-console.log('Server running on port'+CONFIG.PORT);
+console.log('Server running on port' + config.APP.PORT);
