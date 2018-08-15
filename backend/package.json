@@ -4,21 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/index.js",
-    "build": "rm -rf ./build && tsc",
-    "watch": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts",
-    "docs": "./node_modules/.bin/apidoc -i src/ -o docs"
+    "start": "tsc && node dist/index.js",
+    "build": "rm -rf dist && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon --inspect --watch 'src/**/*' -e ts,tsx --exec 'node -r ts-node/register' ./src/index.ts",
+    "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "glob": "^7.1.2",
     "koa": "^2.5.2",
-    "koa-router": "^7.4.0"
+    "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.2",
+    "koa-static": "^5.0.0"
   },
   "devDependencies": {
+    "@types/glob": "^5.0.35",
     "@types/koa": "^2.0.46",
     "@types/koa-bodyparser": "^5.0.1",
+    "@types/koa-logger": "^3.1.0",
     "@types/koa-router": "^7.0.31",
+    "@types/koa-session": "^5.7.4",
+    "@types/koa-static": "^4.0.0",
     "nodemon": "^1.18.3",
     "ts-node": "^7.0.0",
     "typescript": "^3.0.1"
