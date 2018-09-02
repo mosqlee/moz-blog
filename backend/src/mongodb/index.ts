@@ -8,7 +8,7 @@ export const db = mongoose
 
 export const connect = () =>{
   // 连接数据库
-  mongoose.connect(config.MONGODB.uri, {useMongoClient: true})
+  mongoose.connect(config.MONGODB.uri)
   // 连接错误
   mongoose.connection.on('error', e=>{
     console.log('数据库连接失败', e)

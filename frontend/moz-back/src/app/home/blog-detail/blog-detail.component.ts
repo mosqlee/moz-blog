@@ -47,5 +47,5 @@ export class BlogDetailComponent implements OnInit {
   }
   submit(): void {
     console.log('test');
-  }j
+  }
 }

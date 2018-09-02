@@ -11,9 +11,9 @@ const app = new Koa();
 // data server
 mongodb.connect()
 
-mongoosePaginate.paginate.options = {
-  limit: config.APP.LIMIT
-}
+// mongoosePaginate.paginate.options = {
+//   limit: config.APP.LIMIT
+// }
 app.use(Logger());
 
 app.use(koaBody({
