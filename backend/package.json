@@ -8,12 +8,13 @@
     "build": "rm -rf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "debug": "nodemon --inspect --watch 'src/**/*' -e ts,tsx --exec 'node -r ts-node/register' ./src/index.ts",
-    "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
+    "dev": "cross-env nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "cross-env": "^5.2.0",
     "glob": "^7.1.2",
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.2",
@@ -41,7 +42,7 @@
     "@types/mongoose-auto-increment": "^5.0.30",
     "@types/mongoose-paginate": "^5.0.6",
     "nodemon": "^1.18.3",
-    "ts-node": "^7.0.0",
-    "typescript": "^3.0.1"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
   }
 }
