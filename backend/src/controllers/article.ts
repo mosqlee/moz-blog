@@ -8,7 +8,17 @@ import * as Config from '../config'
 
 import Article, { IArticle } from '../model/article'
 
+declare module "koa" {
+  interface Request {
+      body: any;
+      rawBody: {} | null | undefined;
+  }
+  interface Context {
+    params: any;
+  }
+}
 export default class ArticleController {
+  // 列表
   public static async getArts(ctx: Context){
     const {
       page = 1,
@@ -58,6 +68,7 @@ export default class ArticleController {
       .paginate(querys, options)
       .catch(e=>ctx.throw(500, '服务器内部错误'))
     if(result){
+      console.log(result, '*'.repeat(10))
       handleSuccess({
         ctx,
         data:{
@@ -89,6 +100,7 @@ export default class ArticleController {
   }
   public static async getArt(ctx: Context){
     const _id = ctx.params.id
+    console.log(_id, '*'.repeat(10))
     if (!_id) {
       handleError({ ctx, message: '无效参数' })
       return false
@@ -96,9 +108,10 @@ export default class ArticleController {
     const res = (await Article
       .findById(_id)
       .populate('tag')
-      .catch(err => ctx.throw(500, '服务器内部错误')) as IArticle)
+      .catch(err => ctx.throw(500, err+'服务器内部错误')) as IArticle)
     if (res) {
     // 每次请求，views 都增加一次
+    console.log(res)
     res.meta.views += 1
     res.save()
     handleSuccess({ ctx, message: '文章获取成功', data: res })
