@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\wz\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/koa-body --save-dev
+  /usr/local/bin/node /usr/local/bin/yarn install
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\wz\bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Python27;C:\Python27\Scripts;C:\Program Files\Microsoft MPI\Bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Go\bin;C:\Program Files\CMake\bin;C:\Program Files\dotnet;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Users\wz\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\wz\AppData\Local\Programs\Python\Python36;C:\Users\wz\AppData\Local\Microsoft\WindowsApps;C:\Users\wz\AppData\Roaming\npm;C:\Users\wz\go\bin;C:\Program Files\MongoDB\Server\4.0\bin
+  /Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Frameworks/Python.framework/Versions/3.6/bin
 
 Yarn version: 
   1.7.0
@@ -11,20 +11,20 @@ Node version:
   8.11.3
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fkoa-body: Not found
-      at Request.params.callback [as _callback] (C:\Users\wz\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:65656:18)
-      at Request.self.callback (C:\Users\wz\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:134675:22)
-      at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
-      at Request.<anonymous> (C:\Users\wz\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:135658:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (C:\Users\wz\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:135578:12)
+  Error: https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:135306:19)
       at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)
+      at emitNone (events.js:106:13)
+      at ClientRequest.emit (events.js:208:7)
+      at TLSSocket.emitTimeout (_http_client.js:706:34)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:106:13)
+      at TLSSocket.emit (events.js:208:7)
+      at TLSSocket.Socket._onTimeout (net.js:410:8)
+      at ontimeout (timers.js:498:11)
 
 npm manifest: 
   {
@@ -37,13 +37,12 @@ npm manifest:
       "build": "rm -rf dist && tsc",
       "test": "echo \"Error: no test specified\" && exit 1",
       "debug": "nodemon --inspect --watch 'src/**/*' -e ts,tsx --exec 'node -r ts-node/register' ./src/index.ts",
-      "watch-server": "cross-env nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
+      "dev": "cross-env nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
       "axios": "^0.18.0",
-      "cross-env": "^5.2.0",
       "glob": "^7.1.2",
       "jsonwebtoken": "^8.3.0",
       "koa": "^2.5.2",
@@ -70,6 +69,7 @@ npm manifest:
       "@types/mongoose": "^5.2.5",
       "@types/mongoose-auto-increment": "^5.0.30",
       "@types/mongoose-paginate": "^5.0.6",
+      "cross-env": "^5.2.0",
       "nodemon": "^1.18.3",
       "ts-node": "^7.0.1",
       "typescript": "^3.0.3"

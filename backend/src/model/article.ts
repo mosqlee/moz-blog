@@ -34,8 +34,8 @@ const articleSchema = new db.Schema({
   intro: {type: String, required:true},
   img: {type: String, required:true},
   createAt: {type: Number, required:true},
-  updateAt: {type:String, required:true},
-  category: {type:String, required:true},
+  updateAt: { type: Number, required:true},
+  category: { type: Number, required:true},
   // 状态 1 发布 2 草稿
   state: { type: Number, default: 1 },
   // 文章公开状态 1 公开 2 私密
@@ -69,6 +69,7 @@ articleSchema.plugin(autoIncrement.plugin, {
 
 // 时间更新
 articleSchema.pre('findOneAndUpdate', function (next) {
+  console.log(this, '#'.repeat(100))
   this.findOneAndUpdate({}, { update_at: Date.now() })
   next()
 })

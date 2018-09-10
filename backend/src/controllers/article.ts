@@ -10,7 +10,7 @@ import Article, { IArticle } from '../model/article'
 
 declare module "koa" {
   interface Request {
-      body: any;
+      body?: any;
       rawBody: {} | null | undefined;
   }
   interface Context {
@@ -62,11 +62,11 @@ export default class ArticleController {
       querys.state = 1
       querys.publish = 1
     }
-
+    console.log(querys, options);
     // 查询
     const result = await Article
       .paginate(querys, options)
-      .catch(e=>ctx.throw(500, '服务器内部错误'))
+      .catch(e=>ctx.throw(500, '服务器内部错误'+e))
     if(result){
       console.log(result, '*'.repeat(10))
       handleSuccess({
