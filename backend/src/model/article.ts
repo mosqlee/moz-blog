@@ -70,7 +70,7 @@ articleSchema.plugin(autoIncrement.plugin, {
 // 时间更新
 articleSchema.pre('findOneAndUpdate', function (next) {
   console.log(this, '#'.repeat(100))
-  this.findOneAndUpdate({}, { update_at: Date.now() })
+  this.findOneAndUpdate({}, { updateAt: Date.now() })
   next()
 })
 

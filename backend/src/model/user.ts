@@ -31,7 +31,7 @@ userSchema.plugin(autoIncrement.plugin, {
 })
 
 userSchema.pre('findOneAndUpdate', function (next) {
-    this.findOneAndUpdate({}, { update_at: Date.now() })
+    this.findOneAndUpdate({}, { updateAt: Date.now() })
     next()
 })
 
