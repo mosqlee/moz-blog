@@ -26,7 +26,7 @@ export const AUTH = {
 export const APP = {
   ROOT_PATH: '/api',
   LIMIT: 16,
-  PORT: 8000
+  PORT: 8001
 }
 export const INFO = {
   name: 'moz_blog',
