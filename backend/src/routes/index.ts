@@ -11,11 +11,11 @@ const router = new Router({
 // Api
 router
   .get('/', (ctx, next)=>{
-    console.log('what??')
     ctx.response.body = config.INFO
   })
   // 用户
-  .get('/auth', controller.)
+  .get('/auth', controller.auth.getAuth)
+  .post('/auth', controller.auth.postAuth)
   // 文章
   .get('/blog', controller.article.getArts) 														// 文章列表
   .post('/blog', controller.article.postArt)														// 添加文章

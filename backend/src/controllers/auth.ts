@@ -18,6 +18,15 @@ const md5Decode = (pwd:string | Buffer | DataView) => {
   .update(pwd)
   .digest("hex")
 }
+declare module "koa" {
+  interface Request {
+      body?: any;
+      rawBody: {} | null | undefined;
+  }
+  interface Context {
+    params: any;
+  }
+}
 
 export default class AuthController {
   // 登录
@@ -53,6 +62,7 @@ export default class AuthController {
     const auth = await Auth
       .findOne({}, 'name username slogan gravatar')
       .catch(e=>ctx.throw(500, '服务器内部错误'))
+    console.log(auth, 111);
     if(auth){
       handleSuccess({ctx, data: auth, message:'获取用户资料成功'})
     }else{

@@ -6,6 +6,7 @@ import config from './config';
 import router from './routes'
 import * as mongodb from './mongodb'
 import * as mongoosePaginate from 'mongoose-paginate'
+import * as types from './types'
 const app = new Koa();
 
 // data server

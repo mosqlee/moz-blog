@@ -12,7 +12,7 @@ export interface IParams {
 export const handleError =(
   { ctx, message = '请求失败', err = '' }: IParams
 ) =>{
-
+  ctx.response.body = {code:1000, message}
 }
 
 export const handleSuccess = (
