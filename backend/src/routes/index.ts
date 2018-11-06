@@ -11,6 +11,7 @@ const router = new Router({
 // Api
 router
   .get('/', (ctx, next)=>{
+    console.log('what??')
     ctx.response.body = config.INFO
   })
   .get('/blog', controller.article.getArts) 														// 文章列表

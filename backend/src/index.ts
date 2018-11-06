@@ -23,7 +23,7 @@ app.use(koaBody({
 }))
 app
   .use(router.routes())
-  .use(router.allowedMethods())
+  // .use(router.allowedMethods())
 app.use(Static(__dirname + '/../static'))
 app.use(Static(__dirname + '/../doc'))
 // app.use(session(config.sessionConf, app));

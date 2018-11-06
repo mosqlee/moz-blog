@@ -68,7 +68,6 @@ export default class ArticleController {
       .paginate(querys, options)
       .catch(e=>ctx.throw(500, '服务器内部错误'+e))
     if(result){
-      console.log(result, '*'.repeat(10))
       handleSuccess({
         ctx,
         data:{
@@ -100,13 +99,12 @@ export default class ArticleController {
   }
   public static async getArt(ctx: Context){
     const _id = ctx.params.id
-    console.log(_id, '*'.repeat(10))
     if (!_id) {
       handleError({ ctx, message: '无效参数' })
       return false
     }
     const res = (await Article
-      .findById(_id)
+      .findOne({id:_id})
       .populate('tag')
       .catch(err => ctx.throw(500, err+'服务器内部错误')) as IArticle)
     if (res) {
