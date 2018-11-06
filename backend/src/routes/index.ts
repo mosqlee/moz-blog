@@ -14,6 +14,9 @@ router
     console.log('what??')
     ctx.response.body = config.INFO
   })
+  // 用户
+  .get('/auth', controller.)
+  // 文章
   .get('/blog', controller.article.getArts) 														// 文章列表
   .post('/blog', controller.article.postArt)														// 添加文章
   .get('/blog/:id', controller.article.getArt)
