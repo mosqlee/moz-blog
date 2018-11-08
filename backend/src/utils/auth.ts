@@ -36,16 +36,20 @@ export const adminAuthVerified = (req: Request):boolean =>{
   const token = authToken(req)
   if(token) {
     try {
-      const decodedToken = jwt.verify(token, config.AUTH.jwtTokenSecret)
+      console.log(token, 'token')
+
+      // const decodedToken = jwt.verify(token, config.AUTH.jwtTokenSecret)
       // TODO: 增加字段判断权限等级 1：最高管理员 2：一般管理员
       // if(decodedToken.isAdmin){
 
       // }
+
       return true
       // if (decodedToken > Math.floor(Date.now() / 1000)) {
       //   return true
       // }
     } catch (error) {
+      console.log(error)
       return false
     }
   }

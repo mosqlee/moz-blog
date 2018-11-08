@@ -1,4 +1,4 @@
-import { Context, BaseContext } from 'koa'
+import { Context } from 'koa'
 
 import { handleSuccess, IParams, handleError } from '../utils/handle'
 

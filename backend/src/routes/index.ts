@@ -16,6 +16,8 @@ router
   // 用户
   .get('/auth', controller.auth.getAuth)
   .post('/auth', controller.auth.postAuth)
+  .put('/auth', controller.auth.putAuth)
+  .post('/login', controller.auth.login)
   // 文章
   .get('/blog', controller.article.getArts) 														// 文章列表
   .post('/blog', controller.article.postArt)														// 添加文章

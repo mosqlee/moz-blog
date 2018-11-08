@@ -52,11 +52,6 @@ const articleSchema = new db.Schema({
 // 转化成普通 JavaScript 对象
 articleSchema.set('toObject', { getters: true })
 
-// 时间更新
-articleSchema.pre('findOneAndUpdate', function (next) {
-  this.findOneAndUpdate({}, { update_at: Date.now() })
-  next()
-})
 
 // 翻页 + 自增ID插件配置
 articleSchema.plugin(mongoosePaginate)
@@ -69,7 +64,6 @@ articleSchema.plugin(autoIncrement.plugin, {
 
 // 时间更新
 articleSchema.pre('findOneAndUpdate', function (next) {
-  console.log(this, '#'.repeat(100))
   this.findOneAndUpdate({}, { updateAt: Date.now() })
   next()
 })

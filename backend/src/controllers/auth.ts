@@ -1,7 +1,7 @@
 // 后台login
 import  * as crypto from 'crypto'
 import * as jwt from 'jsonwebtoken'
-import {Context, BaseContext} from 'koa'
+import {Context, BaseContext, BaseRequest} from 'koa'
 
 import config = require('../config')
 
@@ -18,25 +18,26 @@ const md5Decode = (pwd:string | Buffer | DataView) => {
   .update(pwd)
   .digest("hex")
 }
-declare module "koa" {
-  interface Request {
-      body?: any;
-      rawBody: {} | null | undefined;
-  }
-  interface Context {
-    params: any;
-  }
-}
 
+// declare module "koa" {
+//   interface Request extends BaseRequest{
+//       body?: any;
+//       rawBody: {} | null | undefined;
+//   }
+//   interface Context {
+//     params: any;
+//   }
+// }
 export default class AuthController {
   // 登录
   public static async login (ctx: Context) {
     const {username, password} = ctx.request.body
+    console.log(username, 'username')
     const auth = (await Auth
       .findOne({username})) as IAuth | null
+    console.log(auth)
     if(!auth){
       handleError({ctx, message:'账户不存在'})
-
     }
     else if(auth.password === md5Decode(password)){
       const token = jwt.sign({
@@ -59,6 +60,7 @@ export default class AuthController {
   }
   // 获取用户信息
   public static async getAuth(ctx: Context) {
+    // 从jwt中解析关键字并检索
     const auth = await Auth
       .findOne({}, 'name username slogan gravatar')
       .catch(e=>ctx.throw(500, '服务器内部错误'))
@@ -69,12 +71,36 @@ export default class AuthController {
       handleError({ctx, message:'获取用户资料失败'})
     }
   }
+  // public static async getAuths(ctx: Context){
+  //   const {
+  //     page = 1,
+  //     pageSize = 10,
+
+  //   } = ctx.query;
+  //   const result = await Auth
+  // }
   // 新增后台用户 暂时开放
   public static async postAuth(ctx: Context){
     // 是否有足够的权限
+    let {
+      name,
+      username,
+      slogan,
+      gravatar,
+      password,
+      permission=2
+    } = JSON.parse(ctx.request.body);
+    let options = {
+      name,
+      username,
+      slogan,
+      gravatar,
+      password:md5Decode(password),
+      permission
+    }
     if(adminAuthVerified(ctx.request)){
       const res = (
-        new Auth(ctx.request.body)
+        new Auth(options)
         .save()
         .catch(err=>ctx.throw(500, "服务器错误"))
       )

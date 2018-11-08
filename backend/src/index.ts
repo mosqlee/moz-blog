@@ -7,6 +7,8 @@ import router from './routes'
 import * as mongodb from './mongodb'
 import * as mongoosePaginate from 'mongoose-paginate'
 import * as types from './types'
+
+import {parseBody} from './middleware'
 const app = new Koa();
 
 // data server
@@ -22,6 +24,8 @@ app.use(koaBody({
   formLimit: '10mb',
   textLimit: '10mb'
 }))
+// 解析一下
+app.use(parseBody)
 app
   .use(router.routes())
   // .use(router.allowedMethods())
