@@ -8,15 +8,6 @@ import * as Config from '../config'
 
 import Article, { IArticle } from '../model/article'
 
-declare module "koa" {
-  interface Request {
-      body?: any;
-      rawBody: {} | null | undefined;
-  }
-  interface Context {
-    params: any;
-  }
-}
 export default class ArticleController {
   // 列表
   public static async getArts(ctx: Context){

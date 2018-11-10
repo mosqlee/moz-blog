@@ -4,7 +4,4 @@ declare module "koa" {
       body?: any;
       rawBody: {} | null | undefined;
   }
-  interface Context extends Koa.BaseContext{
-    params: any;
-  }
 }

@@ -19,20 +19,11 @@ const md5Decode = (pwd:string | Buffer | DataView) => {
   .digest("hex")
 }
 
-// declare module "koa" {
-//   interface Request extends BaseRequest{
-//       body?: any;
-//       rawBody: {} | null | undefined;
-//   }
-//   interface Context {
-//     params: any;
-//   }
-// }
 export default class AuthController {
   // 登录
   public static async login (ctx: Context) {
-    const {username, password} = ctx.request.body
-    console.log(username, 'username')
+    console.log(ctx.params);
+    const {username, password, trew} = ctx.request.body
     const auth = (await Auth
       .findOne({username})) as IAuth | null
     console.log(auth)
@@ -44,6 +35,7 @@ export default class AuthController {
         name:auth.name,
         password:auth.password,
         id:auth._id,
+        permission: auth.permission,
         exp:Math.floor(Date.now() / 1000) + (60*60*24*7)
       }, config.AUTH.jwtTokenSecret)
       handleSuccess({
@@ -61,15 +53,23 @@ export default class AuthController {
   // 获取用户信息
   public static async getAuth(ctx: Context) {
     // 从jwt中解析关键字并检索
-    const auth = await Auth
-      .findOne({}, 'name username slogan gravatar')
-      .catch(e=>ctx.throw(500, '服务器内部错误'))
-    console.log(auth, 111);
-    if(auth){
-      handleSuccess({ctx, data: auth, message:'获取用户资料成功'})
+    const authVerified = authIsVerified(ctx.request)
+    console.log(authVerified, 111);
+    if(authVerified.code !== 100){
+      handleError({ctx, message:authVerified.message})
     }else{
-      handleError({ctx, message:'获取用户资料失败'})
+      const {name} = authVerified
+      const auth = await Auth
+      .findOne({name}, 'name username slogan gravatar')
+      .catch(e=>ctx.throw(500, '服务器内部错误'))
+
+      if(auth){
+        handleSuccess({ctx, data: auth, message:'获取用户资料成功'})
+      }else{
+        handleError({ctx, message:'获取用户资料失败'})
+      }
     }
+
   }
   // public static async getAuths(ctx: Context){
   //   const {
@@ -89,14 +89,14 @@ export default class AuthController {
       gravatar,
       password,
       permission=2
-    } = JSON.parse(ctx.request.body);
+    } = ctx.request.body;
     let options = {
       name,
       username,
       slogan,
       gravatar,
       password:md5Decode(password),
-      permission
+    permission
     }
     if(adminAuthVerified(ctx.request)){
       const res = (
