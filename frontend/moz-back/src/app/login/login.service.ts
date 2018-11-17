@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LoginService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  public loginUrl = 'api/login';
+  public loginUrl = '/api/login';
   public subject: Subject<User> = new Subject<User>();
   constructor(public http: Http) { }
   public get currentUser(): Observable<User> {

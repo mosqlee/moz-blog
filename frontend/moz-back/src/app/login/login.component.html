@@ -2,12 +2,12 @@
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="_submitForm()">
     <div nz-form-item>
       <div nz-form-control>
-        <nz-input formControlName="userName" [nzPlaceHolder]="'Username'" [nzSize]="'large'">
+        <nz-input formControlName="username" [nzPlaceHolder]="'Username'" [nzSize]="'large'">
           <ng-template #prefix>
             <i class="anticon anticon-user"></i>
           </ng-template>
         </nz-input>
-        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">请正确输入您的用户名！</div>
+        <div nz-form-explain *ngIf="validateForm.controls.username.dirty&&validateForm.controls.username.hasError('required')">请正确输入您的用户名！</div>
       </div>
     </div>
     <div nz-form-item>
