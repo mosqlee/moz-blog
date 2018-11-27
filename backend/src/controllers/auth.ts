@@ -22,11 +22,11 @@ const md5Decode = (pwd:string | Buffer | DataView) => {
 export default class AuthController {
   // 登录
   public static async login (ctx: Context) {
-    console.log(ctx.params);
+    console.log(ctx.request.body, 'body');
     const {username, password, trew} = ctx.request.body
     const auth = (await Auth
       .findOne({username})) as IAuth | null
-    console.log(auth)
+    console.log(auth, 'auth')
     if(!auth){
       handleError({ctx, message:'账户不存在'})
     }
@@ -41,6 +41,12 @@ export default class AuthController {
       handleSuccess({
         ctx, 
         data:{
+          auth:{
+            name:auth.name,
+            username:auth.username,
+            avatar:auth.avatar,
+            slogan:auth.slogan
+          },
           token,
           lifeTime:Math.floor(Date.now() / 1000) + (60*60*24*7),
         }, 
@@ -60,7 +66,7 @@ export default class AuthController {
     }else{
       const {name} = authVerified
       const auth = await Auth
-      .findOne({name}, 'name username slogan gravatar')
+      .findOne({name}, 'name username slogan avatar')
       .catch(e=>ctx.throw(500, '服务器内部错误'))
 
       if(auth){
@@ -86,7 +92,7 @@ export default class AuthController {
       name,
       username,
       slogan,
-      gravatar,
+      avatar,
       password,
       permission=2
     } = ctx.request.body;
@@ -94,7 +100,7 @@ export default class AuthController {
       name,
       username,
       slogan,
-      gravatar,
+      avatar,
       password:md5Decode(password),
     permission
     }
@@ -115,13 +121,13 @@ export default class AuthController {
       name,
       username,
       slogan,
-      gravatar,
+      avatar,
       oldPassword,
       newPassword
     } = ctx.request.body
     const _auth = (
       await Auth.
-        findOne({}, '_id name slogan gravatar password')) as IAuth | null
+        findOne({}, '_id name slogan avatar password')) as IAuth | null
       if(_auth){
         if(_auth.password !== md5Decode(oldPassword)) handleError({ctx, message:"原密码错误"})
         else{
@@ -131,7 +137,7 @@ export default class AuthController {
               name,
               username,
               slogan,
-              gravatar,
+              avatar,
               password: md5Decode(password)
             },
             {

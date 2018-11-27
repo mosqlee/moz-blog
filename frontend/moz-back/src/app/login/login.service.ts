@@ -20,9 +20,9 @@ export class LoginService {
     map((res: Response) => {
       const use = res.json();
       console.log(res);
-      if (use) {
-        this.subject.next(Object.assign({}, use));
-      }
+      // if (use) {
+      //   this.subject.next(Object.assign({}, use));
+      // }
       return res;
       }).subscribe((data) => {
         console.log(data, 'login success');

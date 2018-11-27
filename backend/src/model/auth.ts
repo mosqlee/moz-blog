@@ -24,7 +24,7 @@ const authSchema = new db.Schema({
   name: { type: String, default: '' },
   username: { type: String, default: config.AUTH.defaultUsername },
   slogan: { type: String, default:'' },
-  gravatar: { type: String, required: true },
+  avatar: { type: String, required: true },
   password:{
     type: String,
     default: crypto.createHash('md5').update(config.AUTH.defaultPassword).digest('hex')

@@ -25,7 +25,7 @@ app.use(koaBody({
   textLimit: '10mb'
 }))
 // 解析一下,使用这个就不可以用当前服务器存图片了，找个桶子搞一下
-app.use(parseBody())
+// app.use(parseBody())
 app
   .use(router.routes())
   // .use(router.allowedMethods())

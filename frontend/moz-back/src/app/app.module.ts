@@ -10,8 +10,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { appRoute } from './app.routes';
 import { LoginComponent } from './login/login.component';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -26,7 +24,6 @@ import { HttpClientModule } from '@angular/common/http';
     NgZorroAntdModule.forRoot(),
     HttpModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
     ReactiveFormsModule,
     FormsModule
   ],
