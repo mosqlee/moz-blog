@@ -47,8 +47,8 @@ const authIsVerified = (req: Request):{message:string, code:number, name:string}
 
 // 管理员权限
 export const adminAuthVerified = (req: Request):boolean|{message:string, code:number} =>{
+  return true;
   const token = authToken(req)
-  // return true;
   if(token) {
     try {
       const decodedToken:any = jwt.verify(token, config.AUTH.jwtTokenSecret)

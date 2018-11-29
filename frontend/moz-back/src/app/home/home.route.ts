@@ -8,7 +8,8 @@ export const homeRoute = [
         component: HomeComponent,
         children : [
             { path: 'blogList', component: BlogComponent},
-            { path: 'blogDetail/:id', component: BlogDetailComponent }
+            { path: 'blogDetail/:id', component: BlogDetailComponent },
+            {path: 'blogDetail', component: BlogDetailComponent}
         ]
     },
 ];

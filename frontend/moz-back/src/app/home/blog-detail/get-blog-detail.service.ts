@@ -32,14 +32,14 @@ export class GetBlogDetailService {
         })
             .catch(this.handleError);
     }
-    putBlogDetail(id:string, blog:Blog): Promise<void> {
+    putBlogDetail(id: string, blog: Blog): Promise<void> {
         const url = `${this.url}/${id}`;
         return this.http.put(url, blog).toPromise()
-        .then(res =>{
-            if(res. === 1){
-                newEditResult
+        .then(res => {
+            if (res.json().data === 1) {
+                this.newEditResult.next(res.json().data);
             }
-        })
+        });
     }
 
 }

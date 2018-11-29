@@ -1,0 +1,15 @@
+hr{
+    margin: 10px 0;
+}
+.new-blog{
+    display: block;
+    padding: 10px 5px;
+    width: 80px;
+    border-radius: 5px;
+    text-align: center;
+    background: #108ee9;
+    color: #FFF;
+}
+.new-blog:hover{
+    background: #139afb;
+}
