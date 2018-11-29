@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { BlogModel } from './blog-detail/blog.model';
+import { Blog } from './blog/blog.model';
 import { GetBlogDetailService } from './blog-detail/get-blog-detail.service';
 import { BlogService } from './blog/blog.service';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
@@ -19,7 +19,7 @@ import { EditorMdDirective } from './editor/editor-md.directive';
     RouterModule.forChild(homeRoute),
     FormsModule
   ],
-  providers: [BlogService, GetBlogDetailService, BlogModel],
+  providers: [BlogService, GetBlogDetailService, Blog],
   declarations: [HomeComponent,
     BlogDetailComponent, NewsComponent,
     BlogComponent,

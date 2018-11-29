@@ -1,5 +1,5 @@
 import { GetBlogDetailService } from './../blog-detail/get-blog-detail.service';
-import {AfterViewInit, Attribute, Directive, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, AfterContentInit, Attribute, Directive, EventEmitter, Input, Output} from '@angular/core';
 import {EditorConfig} from './model/editor-config';
 
 declare var editormd: any;
@@ -9,7 +9,7 @@ declare var $: any;
   selector: '[appEditorMd]',
   inputs: ['data', 'editormdConfig']
 })
-export class EditorMdDirective implements AfterViewInit {
+export class EditorMdDirective implements AfterContentInit {
   @Input() editormdConfig: EditorConfig; // 配置选项
   @Output() onEditorChange: EventEmitter<string> = new EventEmitter<string>(); // 发射器
   editor: any; // editormd编辑器
@@ -21,7 +21,7 @@ export class EditorMdDirective implements AfterViewInit {
   this.get = getBlogDetailService;
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.editor = editormd(this.id, this.editormdConfig); // 创建编辑器
     const that = this;
     const out = this.onEditorChange;
@@ -32,8 +32,10 @@ export class EditorMdDirective implements AfterViewInit {
     });
     this.get.currentBlog.subscribe(
       (d) => {
-        console.log('subject');
-        this.editor.setMarkdown(d.content);
+        console.log('subject', d.detail);
+        setTimeout(()=>{
+          this.editor.setMarkdown(d.detail);
+        }, 1000);
       }
     );
   }

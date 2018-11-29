@@ -12,7 +12,7 @@
     <select nz-col 
     [nzSpan]="3" name="cate" #cate="ngModel"
     id="" [(ngModel)]="blog.cate" required>
-      <option *ngFor="let item of category" [ngValue]="item.id">{{item.value}}</option>
+      <option *ngFor="let item of category" [ngValue]="item.category">{{item.value}}</option>
     </select>
   </div>
   <div class="form-item">

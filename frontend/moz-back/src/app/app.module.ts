@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { appRoute } from './app.routes';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import {LoginGard} from './gard/login.gard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, LoginGard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

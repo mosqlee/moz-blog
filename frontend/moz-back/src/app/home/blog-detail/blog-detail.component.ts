@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { BlogModel } from './blog.model';
+import { Blog } from '../blog/blog.model';
 import { GetBlogDetailService } from './get-blog-detail.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -16,7 +16,7 @@ export class BlogDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private getBlog: GetBlogDetailService,
-    private blog: BlogModel,
+    private blog: Blog,
   ) { }
 
   conf = new EditorConfig();
@@ -35,13 +35,19 @@ export class BlogDetailComponent implements OnInit {
   }
   ngOnInit() {
     this.route.paramMap
-      //  .map((params: ParamMap) => {
-      //    console.log(params.get('id'))})
-      .switchMap((params: ParamMap) => this.getBlog.getBlogDetail(+params.get('id')))
+       .map((params: ParamMap) => {
+         console.log(params.get('id'));
+         return params;
+        }
+        )
+      .switchMap((params: ParamMap) => {
+        this.getBlog.getBlogDetail(params.get('id'));
+        return this.getBlog.currentBlog;
+      })
       .subscribe(blog => {
-        console.log(blog);
+        console.log(blog, 'blog');
         this.blog = blog;
-        this.markdown = blog.content;
+        this.markdown = blog.detail;
         console.log(this.markdown);
       });
   }

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { Blog } from './blog.model';
 @Injectable()
 export class BlogService {
-    private blogUrl = 'api/blogs';
+    private blogUrl = 'api/blog';
     constructor(public http: Http) {
 
     }
@@ -13,8 +13,9 @@ export class BlogService {
         return this.http.get(this.blogUrl)
             .toPromise()
             .then(response => {
-                console.log(response.json());
-                return response.json() as Blog[];
+                const blogs = response.json().data.list;
+                console.log(blogs);
+                return blogs as Blog[];
             })
             .catch(this.handleError);
     }
