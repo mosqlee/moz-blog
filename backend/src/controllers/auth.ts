@@ -22,11 +22,9 @@ const md5Decode = (pwd:string | Buffer | DataView) => {
 export default class AuthController {
   // 登录
   public static async login (ctx: Context) {
-    console.log(ctx.request.body, 'body');
     const {username, password, trew} = ctx.request.body
     const auth = (await Auth
       .findOne({username})) as IAuth | null
-    console.log(auth, 'auth')
     if(!auth){
       handleError({ctx, message:'账户不存在'})
     }
@@ -60,7 +58,6 @@ export default class AuthController {
   public static async getAuth(ctx: Context) {
     // 从jwt中解析关键字并检索
     const authVerified = authIsVerified(ctx.request)
-    console.log(authVerified, 111);
     if(authVerified.code !== 100){
       handleError({ctx, message:authVerified.message})
     }else{

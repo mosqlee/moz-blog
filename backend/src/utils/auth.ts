@@ -22,14 +22,13 @@ const authToken = (req: Request) => {
   return false
 }
 
-// 验证权限
+// 验证权限，100是后端登录
 
 const authIsVerified = (req: Request):{message:string, code:number, name:string}  =>{
   const token = authToken(req)
   if(token) {
     try {
       const decodedToken:any = jwt.verify(token, config.AUTH.jwtTokenSecret)
-      console.log(decodedToken)
       if (decodedToken.exp <= Math.floor(Date.now() / 1000)) {
         return {message:'登录过期，请重新登录', code:101, name:''}
       }else{
@@ -47,12 +46,11 @@ const authIsVerified = (req: Request):{message:string, code:number, name:string}
 
 // 管理员权限
 export const adminAuthVerified = (req: Request):boolean|{message:string, code:number} =>{
-  return true;
+  // return true;
   const token = authToken(req)
   if(token) {
     try {
       const decodedToken:any = jwt.verify(token, config.AUTH.jwtTokenSecret)
-      console.log(decodedToken, 'token')
       // 过期
       if (decodedToken.exp <= Math.floor(Date.now() / 1000)) {
         return {message:'登录过期，请重新登录', code:101}

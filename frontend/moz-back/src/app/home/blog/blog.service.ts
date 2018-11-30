@@ -6,6 +6,7 @@ import { Blog } from './blog.model';
 @Injectable()
 export class BlogService {
     private blogUrl = 'api/blog';
+    private headers = new Headers({authorization:window.localStorage.getItem('jwtToken')});
     constructor(public http: Http) {
 
     }
@@ -14,7 +15,6 @@ export class BlogService {
             .toPromise()
             .then(response => {
                 const blogs = response.json().data.list;
-                console.log(blogs);
                 return blogs as Blog[];
             })
             .catch(this.handleError);

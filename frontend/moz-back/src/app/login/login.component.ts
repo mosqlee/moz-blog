@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 
   _submitForm() {
     this.user = Object.assign({}, this.validateForm.value);
-    console.log(this.user);
     this.loginService.login(this.user);
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();

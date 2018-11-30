@@ -52,7 +52,6 @@ export class BlogDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap
        .map((params: ParamMap) => {
-         console.log(params.get('id'));
          return params;
         }
         )
@@ -67,15 +66,11 @@ export class BlogDetailComponent implements OnInit {
         return this.getBlog.currentBlog;
       })
       .subscribe(blog => {
-        console.log(blog, 'blog');
         this.blog = blog;
         this.markdown = blog.detail;
-        console.log(this.markdown);
       });
   }
   submit(par:any): void {
-    console.log(par, "argument");
-    console.log(this.blog);
     if(this.isNew){ 
       this.getBlog.postBlogDetail(this.blog).then(res=>{
         if(res.json().data.code === 1){

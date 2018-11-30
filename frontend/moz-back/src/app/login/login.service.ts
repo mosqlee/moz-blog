@@ -21,7 +21,6 @@ export class LoginService {
       const response = res.json();
       const token = response.data.token;
       const use:User = response.data.auth;
-      console.log(response);
       if (use) {
         this.subject.next(Object.assign({}, use));
       }
@@ -31,7 +30,6 @@ export class LoginService {
       }
       return res;
       }).subscribe((data) => {
-        console.log(data, 'login success');
       });
   }
 

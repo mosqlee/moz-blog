@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
     this.loginService.currentUser.subscribe(
       (data) => {
         this.currentUser = data;
-        console.log(data);
         this.router.navigateByUrl('main');
       }
     );

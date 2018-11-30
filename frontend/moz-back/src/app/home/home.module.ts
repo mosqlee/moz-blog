@@ -12,6 +12,8 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { RouterModule } from '@angular/router';
 import { NewsComponent } from './news/news.component';
 import { EditorMdDirective } from './editor/editor-md.directive';
+import {httpInterceptorProviders} from '../http-interceptors/index';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +21,7 @@ import { EditorMdDirective } from './editor/editor-md.directive';
     RouterModule.forChild(homeRoute),
     FormsModule
   ],
-  providers: [BlogService, GetBlogDetailService, Blog],
+  providers: [BlogService, GetBlogDetailService, Blog, httpInterceptorProviders],
   declarations: [HomeComponent,
     BlogDetailComponent, NewsComponent,
     BlogComponent,

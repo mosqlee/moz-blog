@@ -32,7 +32,6 @@ export class EditorMdDirective implements AfterContentInit {
     });
     this.get.currentBlog.subscribe(
       (d) => {
-        console.log('subject', d.detail);
         setTimeout(()=>{
           this.editor.setMarkdown(d.detail);
         }, 1000);

@@ -47,13 +47,12 @@ export default class ArticleController {
       tag?: any
     } = {}
     // 后台请求的filter
-
+    const authVerified = authIsVerified(ctx.request)
     // 如果是前台请求，则重置公开状态和发布状态
-    if (!authIsVerified(ctx.request)) {
+    if(authVerified.code !== 100){
       querys.state = 1
       querys.publish = 1
     }
-    console.log(querys, options);
     // 查询
     const result = await Article
       .paginate(querys, options)
@@ -79,6 +78,11 @@ export default class ArticleController {
     }
   }
   public static async postArt (ctx: Context){
+    const authVerified = authIsVerified(ctx.request);
+    if(authVerified.code !== 100){
+      handleError({ctx, message:authVerified.message});
+      return false;
+    }
     const createTime = Date.parse(new Date().toString())/1000; 
     ctx.request.body.createAt = createTime;
     ctx.request.body.updateAt = createTime;
@@ -87,12 +91,16 @@ export default class ArticleController {
       .save()
       .catch(err=>ctx.throw(500, err))
     )
-    console.log(res, 'res');
     if(res){
       handleSuccess({ctx, message:'添加文章成功'})
     }else handleError({ctx, message:'添加文章失败'})
   }
   public static async putArt (ctx: Context){
+    const authVerified = authIsVerified(ctx.request);
+    if(authVerified.code !== 100){
+      handleError({ctx, message: authVerified.message});
+      return false;
+    }
     const _id = ctx.request.body._id;
     const {title, detail, category, img, intro} = ctx.request.body;
     delete ctx.request.body.createAt;
@@ -125,10 +133,12 @@ export default class ArticleController {
       .populate('tag')
       .catch(err => ctx.throw(500, err+'服务器内部错误')) as IArticle)
     if (res) {
-    // 每次请求，views 都增加一次
-    console.log(res)
-    res.meta.views += 1
-    res.save()
+    // 每次请求，views 都增加一次,后端请求除外
+    const authVerified = authIsVerified(ctx.request);
+    if(authVerified.code !== 100){
+      res.meta.views += 1
+      res.save()
+    }
     handleSuccess({ ctx, message: '文章获取成功', data: res })
 
     } else handleError({ ctx, message: '获取文章失败' })

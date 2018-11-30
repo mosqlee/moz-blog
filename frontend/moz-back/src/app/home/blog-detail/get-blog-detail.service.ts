@@ -1,9 +1,11 @@
 import { Blog } from '../blog/blog.model';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import {ResponseData} from '../../model/response-data.model';
 @Injectable()
 export class GetBlogDetailService {
   private url = 'api/blog';
@@ -13,7 +15,7 @@ export class GetBlogDetailService {
     return this.subject.asObservable();
   }
   constructor(
-    private http: Http
+    private http: HttpClient
   ) { }
   private handleError(error: any): Promise<any> {
     console.error('An error occured', error);
@@ -23,9 +25,9 @@ export class GetBlogDetailService {
     const url = `${this.url}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(res => {
+      .then((res: any) => {
         if (res) {
-          const blog = res.json().data;
+          const blog = res.data;
           this.subject.next(Object.assign({}, blog));
           return res.json() as Blog;
         }
@@ -36,8 +38,7 @@ export class GetBlogDetailService {
   putBlogDetail(id: string, blog: Blog): Promise<void> {
     const url = `${this.url}/${id}`;
     return this.http.put(url, blog).toPromise()
-      .then(res => {
-        console.log(res);
+      .then((res:any) => {
         if (res.json().code === 1) {
           this.newEditResult.next(true);
         }
