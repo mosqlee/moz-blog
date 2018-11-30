@@ -21,6 +21,7 @@ router
   // 文章
   .get('/blog', controller.article.getArts) 														// 文章列表
   .post('/blog', controller.article.postArt)														// 添加文章
+  .put('/blog/:id', controller.article.putArt)//修改文章
   .get('/blog/:id', controller.article.getArt)
 
 export default router

@@ -67,7 +67,11 @@ articleSchema.pre('findOneAndUpdate', function (next) {
   this.findOneAndUpdate({}, { updateAt: Date.now() })
   next()
 })
-
+// 新建时间
+// articleSchema.pre('save', function (next) {
+//   this.save({ updateAt: Date.now() }, )
+//   next()
+// })
 // 文章模型
 const Article = db.model('Article', articleSchema)
 

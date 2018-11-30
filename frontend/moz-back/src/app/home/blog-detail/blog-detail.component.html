@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="form.form.valid && submit()" action="" novalidate role="form">
+<form #form="ngForm" (ngSubmit)=" form.form.valid && submit(form)" novalidate role="form">
   <div class="form-item" nz-row>
     <label nz-col [nzSpan]="2" for="title">*标题：</label>
     <input class="border-form" 
@@ -8,23 +8,56 @@
     <p nz-col [nzSpan]="6" [nzOffset]="1">标题限制5-20个字</p>
   </div>
   <div class="form-item" nz-row>
+    <label nz-col [nzSpan]="2" for="intro">*简介：</label>
+    <input class="border-form" 
+    [ngClass]="{'border-error':form.submitted && !intro.valid}"
+    nz-col [nzSpan]="6" #intro="ngModel"
+    type="text" name="intro" [(ngModel)]="blog.intro" required>
+    <p nz-col [nzSpan]="6" [nzOffset]="1">简介限制20个字</p>
+  </div>
+  <div class="form-item" nz-row>
+    <label nz-col [nzSpan]="2" for="img">*预览图：</label>
+    <input class="border-form" 
+    [ngClass]="{'border-error':form.submitted && !img.valid}"
+    nz-col [nzSpan]="6" #img="ngModel"
+    type="text" name="img" [(ngModel)]="blog.img" required>
+    <p nz-col [nzSpan]="6" [nzOffset]="1">链接</p>
+  </div>
+  <div class="form-item" nz-row>
     <label nz-col [nzSpan]="2" for="cate">类型：</label>
     <select nz-col 
-    [nzSpan]="3" name="cate" #cate="ngModel"
-    id="" [(ngModel)]="blog.cate" required>
-      <option *ngFor="let item of category" [ngValue]="item.category">{{item.value}}</option>
+    [nzSpan]="3" name="category" #category="ngModel"
+    id="" [(ngModel)]="blog.category" required>
+      <option *ngFor="let item of cates" [ngValue]="item.id">{{item.value}}</option>
+    </select>
+  </div>
+  <div class="form-item" nz-row>
+    <label nz-col [nzSpan]="2" for="state">状态：</label>
+    <select nz-col 
+    [nzSpan]="3" name="state" #category="ngModel"
+    id="" [(ngModel)]="blog.state" required>
+      <option *ngFor="let item of states" [ngValue]="item.value">{{item.name}}</option>
+    </select>
+  </div>
+  <div class="form-item" nz-row>
+    <label nz-col [nzSpan]="2" for="pulish">是否保密：</label>
+    <select nz-col 
+    [nzSpan]="3" name="pulish" #category="ngModel"
+    id="" [(ngModel)]="blog.publish" required>
+      <option *ngFor="let item of privates" [ngValue]="item.value">{{item.name}}</option>
     </select>
   </div>
   <div class="form-item">
-    <label for="content">内容：</label>
-    <span>{{form.submitted && !content.valid}}</span>
-    <p [ngClass]="{'letter-error':form.submitted && !content.valid}">内容限制50个字以上。</p>
+    <label for="detail">内容：</label>
+    <span>{{form.form.valid}}</span>
+    <span>{{form.submitted && !detail.valid}}</span>
+    <p [ngClass]="{'letter-error':form.submitted && !detail.valid}">内容限制50个字以上。</p>
   </div>
   <div id="md" appEditorMd [editormdConfig]="conf" [data]="blog" (onEditorChange)="syncModel($event)">
-    <textarea style="display: block;" name="content"
-    [(ngModel)]="markdown" #content="ngModel" required></textarea>
+    <textarea style="display: block;" name="detail"
+    [(ngModel)]="blog.detail" #detail="ngModel" required></textarea>
   </div>
-  <button nz-button [nzType]="'primary'">
+  <button nz-button [nzType]="'primary'" type="submit">
     <span>提交</span>
   </button>
 </form>

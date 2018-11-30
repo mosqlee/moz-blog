@@ -79,15 +79,41 @@ export default class ArticleController {
     }
   }
   public static async postArt (ctx: Context){
-    const res = (
+    const createTime = Date.parse(new Date().toString())/1000; 
+    ctx.request.body.createAt = createTime;
+    ctx.request.body.updateAt = createTime;
+    const res = await (
       new Article(ctx.request.body)
       .save()
-      .catch(err=>ctx.throw(500, '服务器错误'))
+      .catch(err=>ctx.throw(500, err))
     )
+    console.log(res, 'res');
     if(res){
       handleSuccess({ctx, message:'添加文章成功'})
     }else handleError({ctx, message:'添加文章失败'})
   }
+  public static async putArt (ctx: Context){
+    const _id = ctx.request.body._id;
+    const {title, detail, category, img, intro} = ctx.request.body;
+    delete ctx.request.body.createAt;
+    delete ctx.request.body.updateAt;
+    if(!_id){
+      handleError({ctx, message:"无效参数！"})
+      return false;
+    }
+    if(!title || !detail || !category || !img || !intro){
+      handleError({ctx, message:"标题， 详情， 分类， 缩略图， 简介必填！"});
+      return false;
+    }
+    const res = await Article.findByIdAndUpdate(_id, ctx.request.body)
+    if(res){
+      handleSuccess({ctx, message:"更新文章成功"})
+    }else {
+      handleError({ctx, message:"更新文章失败"})
+    }
+    
+  }
+  // 获取详情
   public static async getArt(ctx: Context){
     const _id = ctx.params.id
     if (!_id) {
