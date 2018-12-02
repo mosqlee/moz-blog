@@ -20,13 +20,11 @@ export class BlogDetailComponent implements OnInit {
     private blog: Blog,
   ) { }
 
-  public isNew: boolean = false;
+  public isNew = false;
 
   conf = new EditorConfig();
-  
   markdown = '1';
-  
-  id : string;
+  id: string;
 
   public cates = [
     {id: 0 , value: '前端技术'},
@@ -36,12 +34,12 @@ export class BlogDetailComponent implements OnInit {
   ];
 
   public states = [
-    {name: "发布", value: 1},
-    {name: "草稿", value: 1}
+    {name: '发布', value: 1},
+    {name: '草稿', value: 1}
   ];
   public privates = [
-    {name:"公开", value:1},
-    {name:"私密", value:2}
+    {name: '公开', value: 1 },
+    {name: '私密', value: 2 }
   ];
   // 同步属性内容
   syncModel(str): void {
@@ -56,11 +54,11 @@ export class BlogDetailComponent implements OnInit {
         }
         )
       .switchMap((params: ParamMap) => {
-        if(params.get('id')){
+        if ( params.get('id')) {
           this.id = params.get('id');
           this.getBlog.getBlogDetail(params.get('id'));
           this.isNew = false;
-        }else{
+        } else {
           this.isNew = true;
         }
         return this.getBlog.currentBlog;
@@ -70,22 +68,23 @@ export class BlogDetailComponent implements OnInit {
         this.markdown = blog.detail;
       });
   }
-  submit(par:any): void {
-    if(this.isNew){ 
-      this.getBlog.postBlogDetail(this.blog).then(res=>{
-        if(res.json().data.code === 1){
-          this.route.navigate(['/main/blogList'])
+  submit(par: any): void {
+    if (this.isNew) {
+      this.getBlog.postBlogDetail(this.blog).then((res: any) => {
+        console.log(res.data);
+        if (res.code === 1) {
+          this.route.navigate(['/main/blogList']);
         }
-      })
-    }else {
+      });
+    } else {
       this.getBlog.putBlogDetail(this.id, this.blog);
-      this.getBlog.newEditResult.subscribe(res=>{
-        if(res){
-          this.route.navigate(['/main/blogList'])
-        } else{
+      this.getBlog.newEditResult.subscribe(res => {
+        if (res) {
+          this.route.navigate(['/main/blogList']);
+        } else {
           alert(res);
         }
-      })
+      });
     }
   }
 }

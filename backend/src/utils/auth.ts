@@ -24,24 +24,24 @@ const authToken = (req: Request) => {
 
 // 验证权限，100是后端登录
 
-const authIsVerified = (req: Request):{message:string, code:number, name:string}  =>{
+const authIsVerified = (req: Request):{message:string, code:number, name:string, id:string}  =>{
   const token = authToken(req)
   if(token) {
     try {
       const decodedToken:any = jwt.verify(token, config.AUTH.jwtTokenSecret)
       if (decodedToken.exp <= Math.floor(Date.now() / 1000)) {
-        return {message:'登录过期，请重新登录', code:101, name:''}
+        return {message:'登录过期，请重新登录', code:101, name:'', id:''}
       }else{
-        return {message:'success', code:100, name:decodedToken.name}
+        return {message:'success', code:100, name:decodedToken.name, id:decodedToken.id}
       }
         // if (decodedToken > Math.floor(Date.now() / 1000)) {
       //   return true
       // }
     } catch (error) {
-      return {message:'请先登录', code:102, name:''}
+      return {message:'请先登录', code:102, name:'', id:''}
     }
   }
-  return {message:'请先登录', code:102, name:''}
+  return {message:'请先登录', code:102, name:'', id:''}
 }
 
 // 管理员权限

@@ -77,15 +77,20 @@ export default class ArticleController {
       })
     }
   }
+  // 新增
   public static async postArt (ctx: Context){
     const authVerified = authIsVerified(ctx.request);
+    
     if(authVerified.code !== 100){
       handleError({ctx, message:authVerified.message});
       return false;
     }
+    const {name, id} = authVerified;
     const createTime = Date.parse(new Date().toString())/1000; 
     ctx.request.body.createAt = createTime;
     ctx.request.body.updateAt = createTime;
+    ctx.request.body.auth = name;
+    ctx.request.body.authId = id;
     const res = await (
       new Article(ctx.request.body)
       .save()

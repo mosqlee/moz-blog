@@ -29,7 +29,7 @@ export class GetBlogDetailService {
         if (res) {
           const blog = res.data;
           this.subject.next(Object.assign({}, blog));
-          return res.json() as Blog;
+          return res.data as Blog;
         }
       })
       .catch(this.handleError);
@@ -38,8 +38,8 @@ export class GetBlogDetailService {
   putBlogDetail(id: string, blog: Blog): Promise<void> {
     const url = `${this.url}/${id}`;
     return this.http.put(url, blog).toPromise()
-      .then((res:any) => {
-        if (res.json().code === 1) {
+      .then((res: any) => {
+        if (res.code === 1) {
           this.newEditResult.next(true);
         }
       });
@@ -47,7 +47,7 @@ export class GetBlogDetailService {
   postBlogDetail(blog: Blog) {
     const url = this.url;
     return this.http.post(url, blog)
-      .toPromise()
+      .toPromise();
       // .then(res => {
       //   if (res.json().data.code === '1') {
       //     this.newEditResult.next(res.json().data);

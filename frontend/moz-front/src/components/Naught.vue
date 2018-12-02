@@ -25,24 +25,24 @@ export default {
       data: 'leave',
       x: 0,
       y: 0,
-      containerCoordi:{
+      containerCoordi: {
         x: 0,
         y: 0
       }
     }
   },
-  computed:{
-    btnCoordi:{
+  computed: {
+    btnCoordi: {
       get: function () {
         return {x: this.x, y: this.y}
       },
       set: function (newV) {
         const {x, y} = newV
         console.log(x, y)
-        const scopedZone = {
-          x:{min:x-80, max: x+80},
-          y:{min:y-40, max: y+40}
-        }
+        // const scopedZone = {
+        //   x:{min:x - 80, max: x+80},
+        //   y:{min:y - 40, max: y+40}
+        // }
         this.x = 100
         this.y = 100
       }
@@ -52,11 +52,14 @@ export default {
     onMouseIn (e) {
       console.log(e)
       this.btnCoordi = e
-  }
+    }
   },
-  mounted(){
+  mounted () {
     const container = document.querySelector('.naught-container')
-    this.containerCoordi = {x: container.offsetLeft, y:container.offsetTop}
+    this.containerCoordi = {
+      x: container.offsetLeft,
+      y: container.offsetTop
+    }
   }
 }
 </script>

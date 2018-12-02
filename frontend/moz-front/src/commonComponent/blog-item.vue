@@ -4,7 +4,7 @@
         <div class="blog-title-intro">
             <router-link tag="h2"
             :to="{ name: 'blogDetail', params: { id: item.id }}">{{item.title}}</router-link>
-            <p class="blog-time">{{item.createAt | formatDate(item.category)}}</p>
+            <p class="blog-time">{{item.createAt | formatDate(item)}}</p>
             <p class="blog-intro">{{item.intro}}</p>
         </div>
         <img class="blog-item-img" :src="item.img" alt="">

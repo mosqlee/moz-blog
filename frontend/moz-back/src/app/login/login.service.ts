@@ -19,14 +19,15 @@ export class LoginService {
     return this.http.post(this.loginUrl, JSON.stringify(user), { headers: this.headers }).
     map((res: Response) => {
       const response = res.json();
+      console.log(res);
       const token = response.data.token;
-      const use:User = response.data.auth;
+      const use: User = response.data.auth;
       if (use) {
         this.subject.next(Object.assign({}, use));
       }
-      if (token){
+      if (token) {
         // 储存token到本地
-        window.localStorage.setItem("jwtToken", token);
+        window.localStorage.setItem('jwtToken', token);
       }
       return res;
       }).subscribe((data) => {

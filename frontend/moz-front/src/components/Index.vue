@@ -1,7 +1,7 @@
 <template>
   <div class="nav-container">
     <nav>
-      <div class="nav-basic-info" to="/home">
+      <div class="nav-basic-info text-center" to="/home">
         <img class="nav-avatar" src="../assets/logo.png" alt="">
         <p class="nav-name mg-none">
           <strong>蚊子锅</strong>

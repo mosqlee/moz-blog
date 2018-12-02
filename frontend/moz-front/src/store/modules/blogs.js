@@ -7,10 +7,13 @@ const state = {
 }
 
 const mutations = {
-  query (state, data) {
-    state.bolg_array = data.res.blog
-    state.total_page = data.res.total
-    state.current_page = data.res.current
+  query (state, {data}) {
+    state.bolg_array = data.list
+    const {
+      total
+    } = data.pagination
+    state.total_page = Math.ceil(total / data.pagination.page_size)
+    state.current_page = data.pagination.page
   }
 }
 
@@ -21,7 +24,7 @@ const actions = {
         console.log(res)
         commit({
           type: 'query',
-          res: res.data.data
+          data: res.data.data
         })
       })
       .catch(e => console.log(e))

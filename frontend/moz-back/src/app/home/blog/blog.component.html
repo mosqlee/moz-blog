@@ -31,7 +31,7 @@
         <td nz-td>{{data.category}}</td>
         <td nz-td>{{data.meta.views}}</td>
         <td nz-td>{{data.meta.likes}}</td>
-        <td nz-td>{{data.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td nz-td>{{data.createAt*1000 | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       </tr>
     </tbody>
   </nz-table>

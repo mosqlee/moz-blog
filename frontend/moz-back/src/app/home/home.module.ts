@@ -13,13 +13,14 @@ import { RouterModule } from '@angular/router';
 import { NewsComponent } from './news/news.component';
 import { EditorMdDirective } from './editor/editor-md.directive';
 import {httpInterceptorProviders} from '../http-interceptors/index';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
     NgZorroAntdModule,
     RouterModule.forChild(homeRoute),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [BlogService, GetBlogDetailService, Blog, httpInterceptorProviders],
   declarations: [HomeComponent,

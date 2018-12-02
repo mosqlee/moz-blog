@@ -22,6 +22,8 @@ export interface IArticle extends Document {
   category: string
   detail: string
   tag:string
+  auth: string
+  authId: string
   meta:IMeta
 }
 export interface IMeta {
@@ -42,6 +44,8 @@ const articleSchema = new db.Schema({
   publish: { type: Number, default: 1 },
   detail: {type:String, required:true},
   tag: {type:String, required:false},
+  auth:{type:String, required:true},
+  authId:{type:String, required:true},
   meta:{
     views: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },

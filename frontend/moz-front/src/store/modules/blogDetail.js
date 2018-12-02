@@ -13,7 +13,7 @@ const mutations = {
 
 const actions = {
   getBlog ({ commit }, page) {
-    axios.get(`/api/blog/${page.page}`)
+    axios.get(`/api/blog/${page.id}`)
       .then((res) => {
         console.log(res)
         commit({
